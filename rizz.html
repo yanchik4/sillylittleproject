@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Promposal Website">
+    <title>Promposal</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            position: relative; /* Needed for absolute positioning */
+        }
+
+        .yes-btn {
+            background-color: #98fb98;
+        }
+
+        .no-btn {
+            background-color: #ff6347;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question">Will you go to prom with me?</div>
+        <button class="btn yes-btn" onclick="onYesClick()">Yes</button>
+        <button class="btn no-btn" id="noButton">No</button>
+    </div>
+
+    <script>
+        const noButton = document.getElementById("noButton");
+
+        // Create an audio object for the hover sound
+        const hoverAudio = new Audio('otkaz.mp3');
+
+        // Function to move the "No" button to a new random position
+        noButton.addEventListener("mouseover", () => {
+            const x = Math.floor(Math.random() * (window.innerWidth - noButton.clientWidth));
+            const y = Math.floor(Math.random() * (window.innerHeight - noButton.clientHeight));
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+
+            // Play the hover audio
+            hoverAudio.currentTime = 0; // Rewind to start
+            hoverAudio.play();
+        });
+
+        // Function to handle "Yes" button click
+        function onYesClick() {
+            // Redirect to a new page (replace 'celebration.html' with your actual file name)
+            window.location.href = "celebration.html"; // Update this line to the desired URL
+        }
+    </script>
+</body>
+</html>

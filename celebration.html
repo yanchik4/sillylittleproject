@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cat Celebration Page">
+    <title>Celebration</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Stack the label and images vertically */
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .label {
+            margin-bottom: 20px; /* Space between the label and the images */
+            font-size: 24px; /* Adjust the font size as needed */
+            font-weight: bold; /* Make the label bold */
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center; /* Center images vertically */
+        }
+
+        .cat-image {
+            max-width: 40%; /* Increased to make the images larger */
+            max-height: 40%; /* Increased to make the images larger */
+            display: none; /* Initially hide the images */
+            transition: opacity 0.5s ease-in-out; /* Transition for fade-in effect */
+        }
+
+        .visible {
+            display: block; /* Show the image when this class is added */
+            opacity: 1; /* Ensure it's fully opaque */
+        }
+    </style>
+</head>
+<body>
+    <div class="label">What's cookin', good lookin'?</div> <!-- Added label here -->
+
+    <div class="image-container">
+        <img src="rose.gif" alt="Celebration Cat GIF" class="cat-image" id="catImageLeft"> <!-- GIF on the left -->
+        <img src="cat.jpg" alt="Celebration Cat 1" class="cat-image" id="catImage1">
+        <img src="dubish.jpeg" alt="Celebration Cat 4" class="cat-image" id="catImage4">
+        <img src="usi.jpeg" alt="Celebration Cat 5" class="cat-image" id="catImage5">
+        <img src="rose.gif" alt="Celebration Cat GIF" class="cat-image" id="catImageRight"> <!-- Same GIF on the right -->
+    </div>
+
+    <!-- Include the Canvas Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
+
+    <script>
+        // Function to show all cat images
+        function showAllCatImages() {
+            const allCatImages = document.querySelectorAll('.cat-image');
+            allCatImages.forEach((img, index) => {
+                img.style.display = 'block'; // Make each image visible
+                setTimeout(() => {
+                    img.classList.add('visible'); // Add the visible class for fade-in effect
+                }, index * 100); // Stagger the fade-in effect
+            });
+
+            // Trigger the confetti effect
+            setTimeout(() => {
+                launchConfetti();
+            }, 500); // Adjust timing if needed
+        }
+
+        // Function to launch confetti
+        function launchConfetti() {
+            const end = Date.now() + (5 * 1000); // Confetti lasts for 5 seconds
+            const colors = ['#ff0', '#0f0', '#00f', '#f00', '#ff00', '#0ff']; // Confetti colors
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors,
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors,
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+
+        // Trigger the function to show all images when the page loads
+        window.onload = function() {
+            showAllCatImages(); // Show all cat images when the page loads
+        };
+    </script>
+</body>
+</html>
+
